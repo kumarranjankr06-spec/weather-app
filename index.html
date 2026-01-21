@@ -1,1 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather app in js</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #a {
+  border-radius: 1rem;
+  height: 35rem;
+  width: 30rem;
+  background-color: aqua;
+  margin-top: 3rem;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* horizontal centering */
+}
+
+    #b{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4rem;
+        margin-top: 2rem;
+    }
+    #c{
+        height: 2rem;
+        width: 15rem;
+        color: black;
+        font-size: 18px;
+        border-radius: 1rem;
+        text-align: center;
+        margin: none;
+    }
+    #c ::placeholder{
+        color: black;
+        
+        font: 18px;
+        margin-left: 3px;
+    }
+    #d{
+        height: 2rem;
+        width: 5rem;
+        background-color: black;
+        color: white;
+        border-radius: 9px;
+        font-size: 15px;
+    }
+    #pic{
+        
+        margin-top: 2rem;
+        border-radius: 1rem;
+        width: 8rem;
+        height: 8rem;
+    }
+    #temp{
+        font-size: 5rem;
+        
+        margin-top: 1rem;
+    }
+    #city{
+        font-size: 3rem;
+        
+        margin-top: 1rem;
+    }
+    #hw{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5rem;
+        padding-top: 2rem;
+    }
+    .qwe{
+        height: 5rem;
+    }
+    #spec{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8rem;
+    }
+    /* https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key} */
+
+/* aa73c3ae9417cbe8d4ff5ef357a60fb2 */
+</style>
+<body>
+    <div id="a">
+        <div id="b">
+            <input type="text" placeholder="Enter the city name" id="c">
+            <button id="d" onclick="show()">serach</button>
+        </div>
+        <img src="pictures_weather/rain.jpeg" id="pic">
+        <h1 id="temp"> 22 °C</h1>
+        <h2 id="city">New York</h2>
+
+        <div id="hw">
+            <img src="pictures_weather/humidity.png" class="qwe">
+            <img src="pictures_weather/windSpeed.png" class="qwe">
+        </div><br>
+        <div id="spec">
+            <div id="hum">50%</div>
+            <div id="speed"> 18 km/hr</div>
+        </div>
+    </div>
+
+    <script>
+        const apikey="aa73c3ae9417cbe8d4ff5ef357a60fb2";
+        const apiurl="https://api.openweathermap.org/data/2.5/weather?q=";
+        let city=document.getElementById("c");
+        function show(){
+            const cityName=city.value;
+            console.log(cityName);
+            helloCity();
+        }
+        async function helloCity() {
+            const cityName=city.value;
+            const response=await fetch(apiurl+cityName+`&appid=${apikey}`);
+            const hello=await response.json();
+            console.log(hello);
+            document.getElementById("city").innerHTML=hello.name;
+            document.getElementById("hum").innerHTML=`${hello.main.humidity} %`;
+            document.getElementById("speed").innerHTML=`${hello.wind.speed} km/hr`;
+            let temp=hello.main.feels_like-273;
+            let mn=temp.toFixed(1);
+            document.getElementById("temp").innerHTML=`${mn} °C`;
+            if(hello.weather[0].main=="Clouds"){
+                document.getElementById("pic").src="pictures_weather/clouds.jpeg";
+            }
+            if(hello.weather[0].main=="Clear"){
+                document.getElementById("pic").src="pictures_weather/clear.jpeg";
+            }
+            if(hello.weather[0].main=="Rain"){
+                document.getElementById("pic").src="pictures_weather/rain.jpeg";
+            }
+            if(hello.weather[0].main=="Mist"){
+                document.getElementById("pic").src="pictures_weather/mist.jpeg";
+            }
+        }
+    </script>
+</body>
+</html>
