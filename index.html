@@ -105,8 +105,8 @@
         <h2 id="city">New York</h2>
 
         <div id="hw">
-            <img src="pictures_weather/humidity.png" class="qwe">
-            <img src="pictures_weather/windSpeed.png" class="qwe">
+            <img src="humidity.png" class="qwe">
+            <img src="windSpeed.png" class="qwe">
         </div><br>
         <div id="spec">
             <div id="hum">50%</div>
@@ -135,16 +135,16 @@
             let mn=temp.toFixed(1);
             document.getElementById("temp").innerHTML=`${mn} °C`;
             if(hello.weather[0].main=="Clouds"){
-                document.getElementById("pic").src="pictures_weather/clouds.jpeg";
+                document.getElementById("pic").src="clouds.jpeg";
             }
             if(hello.weather[0].main=="Clear"){
-                document.getElementById("pic").src="pictures_weather/clear.jpeg";
+                document.getElementById("pic").src="clear.jpeg";
             }
             if(hello.weather[0].main=="Rain"){
-                document.getElementById("pic").src="pictures_weather/rain.jpeg";
+                document.getElementById("pic").src="rain.jpeg";
             }
             if(hello.weather[0].main=="Mist"){
-                document.getElementById("pic").src="pictures_weather/mist.jpeg";
+                document.getElementById("pic").src="mist.jpeg";
             }
         }
     </script>
